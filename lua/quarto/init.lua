@@ -4,9 +4,6 @@ local cfg = require 'quarto.config'
 local tools = require 'quarto.tools'
 local util = require 'quarto.util'
 
-function M.quartoPreviewNoWatch()
-  M.quartoPreview { args = '--no-watch-inputs' }
-end
 
 function M.quartoUpdatePreview()
   local quartoOutputBuf = api.nvim_buf_get_var(0, 'quartoOutputBuf')
