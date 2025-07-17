@@ -5,21 +5,6 @@ local tools = require 'quarto.tools'
 local util = require 'quarto.util'
 
 
-M.searchHelp = function(cmd_input)
-  local topic = cmd_input.args
-  local url = 'https://quarto.org/?q=' .. topic .. '&show-results=1'
-  local sysname = vim.loop.os_uname().sysname
-  local cmd
-  if sysname == 'Linux' then
-    cmd = 'xdg-open "' .. url .. '"'
-  elseif sysname == 'Darwin' then
-    cmd = 'open "' .. url .. '"'
-  else
-    print 'sorry, I do not know how to make Windows open a url with the default browser. This feature currently only works on linux and mac.'
-    return
-  end
-  vim.fn.jobstart(cmd)
-end
 
 -- from https://github.com/neovim/nvim-lspconfig/blob/f98fa715acc975c2dd5fb5ba7ceddeb1cc725ad2/lua/lspconfig/util.lua#L23
 function M.bufname_valid(bufname)
