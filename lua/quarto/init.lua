@@ -1,10 +1,6 @@
 local M = {}
 local api = vim.api
 local cfg = require 'quarto.config'
-local tools = require 'quarto.tools'
-local util = require 'quarto.util'
-
-
 
 -- from https://github.com/neovim/nvim-lspconfig/blob/f98fa715acc975c2dd5fb5ba7ceddeb1cc725ad2/lua/lspconfig/util.lua#L23
 function M.bufname_valid(bufname)
