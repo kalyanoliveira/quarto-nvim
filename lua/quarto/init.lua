@@ -5,30 +5,6 @@ local tools = require 'quarto.tools'
 local util = require 'quarto.util'
 
 
-function M.quartoUpdatePreview()
-  local quartoOutputBuf = api.nvim_buf_get_var(0, 'quartoOutputBuf')
-  local query_start = 'Browse at http'
-  local lines = vim.api.nvim_buf_get_lines(quartoOutputBuf, 0, -1, false)
-  local url = nil
-  for _, line in ipairs(lines) do
-    if line:find(query_start) then
-      url = 'http' .. line:sub(#query_start + 1)
-      break
-    end
-  end
-  if not url then
-    vim.notify('Could not find the preview url in the terminal buffer. Maybe it is still warming up. Check the buffer and try again.', vim.log.levels.WARN)
-    return
-  end
-  api.nvim_buf_set_var(0, 'quartoUrl', url)
-  local request_url = url .. 'quarto-render/'
-  local get_request = 'curl -s ' .. request_url
-  local response = vim.fn.system(get_request)
-  if response ~= 'rendered' then
-    vim.notify_once('Failed to update preview with command: ' .. get_request, vim.log.levels.ERROR)
-  end
-end
-
 function M.quartoClosePreview()
   local success, quartoOutputBuf = pcall(api.nvim_buf_get_var, 0, 'quartoOutputBuf')
   if not success then
