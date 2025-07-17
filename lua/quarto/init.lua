@@ -5,16 +5,6 @@ local tools = require 'quarto.tools'
 local util = require 'quarto.util'
 
 
-function M.quartoClosePreview()
-  local success, quartoOutputBuf = pcall(api.nvim_buf_get_var, 0, 'quartoOutputBuf')
-  if not success then
-    return
-  end
-  if api.nvim_buf_is_loaded(quartoOutputBuf) then
-    api.nvim_buf_delete(quartoOutputBuf, { force = true })
-  end
-end
-
 M.searchHelp = function(cmd_input)
   local topic = cmd_input.args
   local url = 'https://quarto.org/?q=' .. topic .. '&show-results=1'
